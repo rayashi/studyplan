@@ -18,7 +18,7 @@ class StudyPlansTableViewController: UITableViewController {
     }()
     
     override func viewDidLoad() {
-        super.viewDidLoad() 
+        super.viewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +43,7 @@ class StudyPlansTableViewController: UITableViewController {
         if editingStyle == .delete {
             studyManager.removePlan(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
         }
     }
 

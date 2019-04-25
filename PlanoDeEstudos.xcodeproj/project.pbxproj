@@ -62,9 +62,9 @@
 		A12AC6081F9D1487006EEC7B /* PlanoDeEstudos */ = {
 			isa = PBXGroup;
 			children = (
+				A12AC6091F9D1487006EEC7B /* AppDelegate.swift */,
 				5CDD86C622712BC700165673 /* StudyPlan.swift */,
 				5CDD86C822712D0900165673 /* StudyManager.swift */,
-				A12AC6091F9D1487006EEC7B /* AppDelegate.swift */,
 				A12AC60B1F9D1487006EEC7B /* ViewController.swift */,
 				A12AC60D1F9D1487006EEC7B /* Main.storyboard */,
 				A12AC61B1F9D1741006EEC7B /* StudyPlanViewController.swift */,

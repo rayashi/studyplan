@@ -13,10 +13,32 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let center = UNUserNotificationCenter.current()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window?.tintColor = UIColor(named: "main")
+        
+        center.delegate = self
+        center.getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .notDetermined {
+                let options: UNAuthorizationOptions = [.alert, .badge, .sound, .carPlay]
+                self.center.requestAuthorization(options: options, completionHandler: { (success, error) in
+                    if error == nil {
+                        print(error?.localizedDescription ?? "erro sem descricao na requisicao")
+                    } else {
+                        print(success)
+                    }
+                })
+            } else if settings.authorizationStatus == .denied {
+                print("Usuario negou a autorizacao")
+            }
+        }
+        
+        let confirm = UNNotificationAction(identifier: "confirm", title: "Já estudei 🤓", options: [.foreground])
+        let cancel = UNNotificationAction(identifier: "cancel", title: "Cancelar", options: [])
+        let category = UNNotificationCategory(identifier: "Lembrete", actions: [confirm, cancel], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: "", options: [.customDismissAction])
+        center.setNotificationCategories([category])
         return true
     }
 
@@ -42,4 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
 }
