@@ -18,11 +18,12 @@ class StudyPlansTableViewController: UITableViewController {
     }()
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad() 
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -40,6 +41,8 @@ class StudyPlansTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            studyManager.removePlan(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 
